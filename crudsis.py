@@ -1,29 +1,30 @@
-# Student Management System
+# Student Information System
 """
-elements :- ['id-number', 'name', 'year-level', 'gender', 'cource']
+elements :- ['id-number', 'name','course', 'year-level', 'gender', ]
 1. Add New Student
-2. View Students
-3. Search Student
-4. Update Student
-5. Delete Student
+2. Display list of students
+3. Search a student by id number
+4. Edit student
+5. Delete a Student
 6. Quit
 """
-
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QApplication, QMainWindow
+import sys
 import csv
 # Define global variables
-student_elements = [ 'name','id_number', 'year_level', 'gender', 'cource']
+student_elements = [ 'id_number','name', 'course ','year_level', 'gender ', ]
 student_database = 'students.csv'
-
 
 def display_menu():
     print("--------------------------------------")
-    print(" Welcome to Student Management System")
+    print(" Welcome to Student Information System")
     print("---------------------------------------")
     print("1. Add New Student")
-    print("2. View Students")
-    print("3. Search Student")
-    print("4. Update Student")
-    print("5. Delete Student")
+    print("2. Display list of students")
+    print("3. Search a student by id number")
+    print("4. Edit student")
+    print("5. Delete a Student")
     print("6. Quit")
 
 
@@ -50,7 +51,7 @@ def add_student():
     return
 
 
-def view_students():
+def display_students():
     global student_elements
     global student_database
 
@@ -58,8 +59,6 @@ def view_students():
 
     with open(student_database, "r", encoding="utf-8") as f:
         reader = csv.reader(f)
-        for x in student_elements:
-            print(x, end='\t |')
         print("\n-----------------------------------------------------------------")
 
         for row in reader:
@@ -80,20 +79,21 @@ def search_student():
         reader = csv.reader(f)
         for row in reader:
             if len(row) > 0:
-                if id_number == row[1]:
+                if id_number == row[0]:
                     print("----- Student Found -----")
-                    print("ID-Number: ", row[1])
-                    print("Name: ", row[0])
-                    print("Year-Level: ", row[2])
-                    print("Gender: ", row[3])
-                    print("Course: ", row[4])
+                    print("ID-Number: ", row[0])
+                    print("Name: ", row[1])
+                    print("Course: ", row[2])
+                    print("Year-Level: ", row[3])
+                    print("Gender: ", row[4])
+                    
                     break
         else:
             print("ID-Number. not found in our database")
     input("Press any key to continue")
 
 
-def update_student():
+def edit_student():
     global student_elements
     global student_database
 
@@ -106,7 +106,7 @@ def update_student():
         counter = 0
         for row in reader:
             if len(row) > 0:
-                if id_number == row[1]:
+                if id_number == row[0]:
                     index_student = counter
                     print("Student Found: at index ",index_student)
                     student_data = []
@@ -143,7 +143,7 @@ def delete_student():
         counter = 0
         for row in reader:
             if len(row) > 0:
-                if id_number != row[1]:
+                if id_number != row[0]:
                     updated_data.append(row)
                     counter += 1
                 else:
@@ -166,11 +166,11 @@ while True:
     if choice == '1':
         add_student()
     elif choice == '2':
-        view_students()
+        display_students()
     elif choice == '3':
         search_student()
     elif choice == '4':
-        update_student()
+        edit_student()
     elif choice == '5':
         delete_student()
     else:
