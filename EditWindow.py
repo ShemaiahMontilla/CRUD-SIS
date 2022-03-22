@@ -182,6 +182,13 @@ class Ui_EditWindow(object):
             with open(fileName, "w", encoding="utf-8") as fileInput:
                 writer = csv.writer(fileInput)
                 writer.writerows(updated_data)
+                msg=QMessageBox()
+                msg.setWindowTitle("--- Edit a Student ---")
+                msg.setText("Succesfully updated student "+ID_Number+"")
+                msg.setInformativeText("Update student "+ID_Number+"")
+                msg.setIcon(QMessageBox.Information)
+                msg.setStandardButtons(QMessageBox.Ok|QMessageBox.Cancel)
+                msg.exec()
                 
     
 
