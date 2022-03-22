@@ -12,8 +12,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 import csv
 
-
+# The class for the Ui_EditWindow, the 2nd window
 class Ui_EditWindow(object):
+#Function for the setupUI , setting of the UI buttons,Input widgets , and etc
     def setupUi(self, EditWindow):
         EditWindow.setObjectName("EditWindow")
         EditWindow.resize(640, 480)
@@ -135,6 +136,7 @@ class Ui_EditWindow(object):
         self.retranslateUi(EditWindow)
         QtCore.QMetaObject.connectSlotsByName(EditWindow)
 
+#Function for retanslateUI, it set the text for the button, input widgets and etc
     def retranslateUi(self, EditWindow):
         _translate = QtCore.QCoreApplication.translate
         EditWindow.setWindowTitle(_translate("EditWindow", "MainWindow"))
@@ -147,7 +149,7 @@ class Ui_EditWindow(object):
         self.comboBox2W.setItemText(0, _translate("EditWindow", "Male"))
         self.comboBox2W.setItemText(1, _translate("EditWindow", "Female"))
  
-
+#Function that edit a student
     def edit_student(self):
 
         fileName = 'C:/Users/monti/A-CRUD/students.csv'
@@ -176,7 +178,7 @@ class Ui_EditWindow(object):
 
 
 
-        # Check if the record is found or not
+        # Check if the record is found 
         if index_student is not None:
             fileName = 'C:/Users/monti/A-CRUD/students.csv'
             with open(fileName, "w", encoding="utf-8") as fileInput:
@@ -185,7 +187,7 @@ class Ui_EditWindow(object):
                 msg=QMessageBox()
                 msg.setWindowTitle("--- Edit a Student ---")
                 msg.setText("Succesfully updated student "+ID_Number+"")
-                msg.setInformativeText("Update student "+ID_Number+"")
+                msg.setInformativeText("Updated student "+ID_Number+"")
                 msg.setIcon(QMessageBox.Information)
                 msg.setStandardButtons(QMessageBox.Ok|QMessageBox.Cancel)
                 msg.exec()

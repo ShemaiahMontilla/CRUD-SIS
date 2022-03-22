@@ -16,7 +16,7 @@ import csv
 
 # The class for the Ui_MainWindow
 class Ui_MainWindow(object):
-    #A function that will open the second window for the edit operation
+    #A function that will open the second window for the edit operation and it check if the inputted student's is in the data set or not
     def openEditWindow(self):
         
         fileName = 'C:/Users/monti/A-CRUD/students.csv'
@@ -322,6 +322,7 @@ class Ui_MainWindow(object):
                     for field in row
                 ]
                 self.model.appendRow(items)
+    #Function that will clear the display on the table
     def clear(self):
         self.model.clear()
                 
@@ -418,8 +419,7 @@ class Ui_MainWindow(object):
             msg.setStandardButtons(QMessageBox.Ok|QMessageBox.Cancel)
             msg.exec()
 
-
-            #The Edit/Update operation is in the 2nd python file for the 2nd window
+########################  The Edit/Update operation is in the 2nd python file for the 2nd or EDIT window   ##############################
            
            
         
