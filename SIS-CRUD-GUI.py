@@ -246,6 +246,18 @@ class Ui_MainWindow(object):
         self.pushButton_4.setObjectName("pushButton_4")
         self.pushButton_4.clicked.connect(self.delete_student)
 
+        self.BtnClear = QtWidgets.QPushButton(self.centralwidget)
+        self.BtnClear.setGeometry(QtCore.QRect(200, 350, 110, 35))
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        font.setBold(True)
+        font.setWeight(75)
+        self.BtnClear.setFont(font)
+        self.BtnClear.setStyleSheet("background-color: rgb(175, 255, 166);\n"
+"border-color: rgb(0, 255, 255);")
+        self.BtnClear.setObjectName("BtnClear")
+        self.BtnClear.clicked.connect(self.clear)
+
 
         self.lineEditDelete = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEditDelete.setGeometry(QtCore.QRect(730, 850, 281, 41))
@@ -297,6 +309,7 @@ class Ui_MainWindow(object):
         self.lineEditEdit.setPlaceholderText(_translate("MainWindow", "Enter student's id-number to update:"))
         self.pushButton_3.setText(_translate("MainWindow", "Add new student"))
         self.pushButton_4.setText(_translate("MainWindow", "Delete a student"))
+        self.BtnClear.setText(_translate("MainWindow", "Clear Table"))
         self.lineEditDelete.setPlaceholderText(_translate("MainWindow", "Enter student's id-number to delete:"))
         
   #Fucntion that will display the dataset from the text file or csv file. It will load the data  
@@ -309,6 +322,8 @@ class Ui_MainWindow(object):
                     for field in row
                 ]
                 self.model.appendRow(items)
+    def clear(self):
+        self.model.clear()
                 
   #Function that searches the student using a key value which is the id number, it pop ups the data of the said student 
     def search_student(self):
@@ -360,13 +375,7 @@ class Ui_MainWindow(object):
         msg.setStandardButtons(QMessageBox.Ok|QMessageBox.Cancel)
         msg.exec()
         
-        with open(fileName, "r") as fileInput:
-            for row in csv.reader(fileInput):    
-                items = [
-                    QtGui.QStandardItem(field)
-                    for field in row
-                ]
-                self.model.appendRow(items)
+
                 
         return
  
