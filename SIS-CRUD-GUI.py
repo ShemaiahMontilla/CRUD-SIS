@@ -317,7 +317,7 @@ class Ui_MainWindow(object):
                 if len(row) > 0:
                         if id_number == row[0]:
                                 msg=QMessageBox()
-                                msg.setWindowTitle("--- Search Student ---")
+                                msg.setWindowTitle("--- SearchS a tudent ---")
                                 msg.setText("ID-Number found in our database..")
                                 msg.setInformativeText("ID-Number:  "+row[0]+"\n" "Name:  " +row[1]+ "\n""Course:  "+row[2]+"\n""Year-Leve:  "+row[3]+"\n""Gender:  "+row[4])
                                 msg.setIcon(QMessageBox.Information)
@@ -326,7 +326,7 @@ class Ui_MainWindow(object):
                                 break
             else:
                 msg=QMessageBox()
-                msg.setWindowTitle("Confirm ation Message")
+                msg.setWindowTitle("---Search a Student")
                 msg.setText("ID-Number not found in our database..")
                 msg.setIcon(QMessageBox.Information)
                 msg.setStandardButtons(QMessageBox.Ok|QMessageBox.Cancel)
@@ -388,7 +388,7 @@ class Ui_MainWindow(object):
             msg=QMessageBox()
             msg.setWindowTitle("--- Delete a Student ---")
             msg.setText("ID-Number found in our database..")
-            msg.setInformativeText("Stdent with an ID-Number: ", ID_number, "was deleted successfully")
+            msg.setInformativeText("Stdent with an ID-Number: "+ID_number+" was deleted successfully")
             msg.setIcon(QMessageBox.Information)
             msg.setStandardButtons(QMessageBox.Ok|QMessageBox.Cancel)
             msg.exec()
