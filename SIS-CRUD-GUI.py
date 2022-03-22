@@ -14,8 +14,9 @@ from PyQt5.QtWidgets import QMessageBox, QTableView
 from EditWindow import  Ui_EditWindow
 import csv
 
-
+# The class for the Ui_MainWindow
 class Ui_MainWindow(object):
+    #A function that will open the second window for the edit operation
     def openEditWindow(self):
         
         fileName = 'C:/Users/monti/A-CRUD/students.csv'
@@ -30,9 +31,10 @@ class Ui_MainWindow(object):
                 if len(row) > 0:
                     if idnumber == row[0]:
                         index_student = counter
+                        #A Message Box that will pop up if the ID-Number is found in the data set
                         msg=QMessageBox()
                         msg.setWindowTitle("--- Edit Student ---")
-                        msg.setText("ID-Number found in our database..")
+                        msg.setText("ID-Number found in our dataset..")
                         msg.setInformativeText("Student Found: at index "+str(index_student))
                         msg.setIcon(QMessageBox.Information)
                         msg.setStandardButtons(QMessageBox.Ok|QMessageBox.Cancel)
@@ -44,17 +46,18 @@ class Ui_MainWindow(object):
                     else:
                      updated_data.append(row)
                     counter += 1
+         #A Message Box that will pop up if the ID-Number is not found in the data set
         if index_student is None:
             msg=QMessageBox()
             msg.setWindowTitle("--- ---")
-            msg.setText("ID-Number not found in our database..")
+            msg.setText("ID-Number not found in our dataset..")
             msg.setIcon(QMessageBox.Information)
             msg.setStandardButtons(QMessageBox.Ok|QMessageBox.Cancel)
             msg.exec()  
 
                     
                         
-
+#Function for the setupUI , setting of the UI buttons,Input widgets , table view and etc
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1100, 1000)
@@ -275,6 +278,7 @@ class Ui_MainWindow(object):
         self.model.setHorizontalHeaderLabels(['ID Number', 'Name', 'Course', 'Year', 'Gender'])
         self.tableView.setModel(self.model)
 
+#Function for retanslateUI, it set the text for the button, input widgets and etc
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -295,7 +299,7 @@ class Ui_MainWindow(object):
         self.pushButton_4.setText(_translate("MainWindow", "Delete a student"))
         self.lineEditDelete.setPlaceholderText(_translate("MainWindow", "Enter student's id-number to delete:"))
         
-    
+  #Fucntion that will display the dataset from the text file or csv file. It will load the data  
     def loadCsv(self):
         fileName = 'C:/Users/monti/A-CRUD/students.csv'
         with open(fileName, "r") as fileInput:
@@ -306,7 +310,7 @@ class Ui_MainWindow(object):
                 ]
                 self.model.appendRow(items)
                 
-   
+  #Function that searches the student using a key value which is the id number, it pop ups the data of the said student 
     def search_student(self):
 
         fileName = 'C:/Users/monti/A-CRUD/students.csv'
@@ -316,22 +320,24 @@ class Ui_MainWindow(object):
             for row in csv.reader(fileInput): 
                 if len(row) > 0:
                         if id_number == row[0]:
+                            # Message box that will pop up when the student is found and it shows the data of the said student
                                 msg=QMessageBox()
                                 msg.setWindowTitle("--- SearchS a tudent ---")
-                                msg.setText("ID-Number found in our database..")
+                                msg.setText("ID-Number found in our dataset..")
                                 msg.setInformativeText("ID-Number:  "+row[0]+"\n" "Name:  " +row[1]+ "\n""Course:  "+row[2]+"\n""Year-Leve:  "+row[3]+"\n""Gender:  "+row[4])
                                 msg.setIcon(QMessageBox.Information)
                                 msg.setStandardButtons(QMessageBox.Ok|QMessageBox.Cancel)
                                 msg.exec()
                                 break
             else:
+                #A Message box if the student's id number does not have a match in the dataset
                 msg=QMessageBox()
                 msg.setWindowTitle("---Search a Student")
-                msg.setText("ID-Number not found in our database..")
+                msg.setText("ID-Number not found in our dataset..")
                 msg.setIcon(QMessageBox.Information)
                 msg.setStandardButtons(QMessageBox.Ok|QMessageBox.Cancel)
                 msg.exec()
-   
+   #A function that will add the student in the data set
     def add_student(self):
         fileName = 'C:/Users/monti/A-CRUD/students.csv'
         name = self.lineEditName.text()
@@ -346,7 +352,7 @@ class Ui_MainWindow(object):
          encoding="utf-8") as fileInput:
                 writer = csv.writer(fileInput)
                 writer.writerows([student_data])
-
+# A message box that will show that the student was added to the set successfully
         msg=QMessageBox()
         msg.setWindowTitle("--- Add a Student ---")
         msg.setText("Data saved successfully")
@@ -364,7 +370,7 @@ class Ui_MainWindow(object):
                 
         return
  
-
+#A function that will delete a student from the data set
     def delete_student(self):
         fileName = 'C:/Users/monti/A-CRUD/students.csv'
         ID_number = self.lineEditDelete.text()
@@ -385,22 +391,26 @@ class Ui_MainWindow(object):
             with open(fileName, "w", encoding="utf-8") as fileInput:
                 writer = csv.writer(fileInput)
                 writer.writerows(updated_data)
+            # Message box that shows if the student was deleted succesfully
             msg=QMessageBox()
             msg.setWindowTitle("--- Delete a Student ---")
-            msg.setText("ID-Number found in our database..")
+            msg.setText("ID-Number found in our dataset..")
             msg.setInformativeText("Stdent with an ID-Number: "+ID_number+" was deleted successfully")
             msg.setIcon(QMessageBox.Information)
             msg.setStandardButtons(QMessageBox.Ok|QMessageBox.Cancel)
             msg.exec()
-                                
+            # Message box that shows if the student was not deleted succesfully                        
         else:
             msg=QMessageBox()
             msg.setWindowTitle("--- Delete a Student ---")
-            msg.setText("ID-Number found in our database..")
+            msg.setText("ID-Number not found in our dataset..")
             msg.setInformativeText("ID-Number not found in our database")
             msg.setIcon(QMessageBox.Information)
             msg.setStandardButtons(QMessageBox.Ok|QMessageBox.Cancel)
             msg.exec()
+
+
+            #The Edit/Update operation is in the 2nd python file for the 2nd window
            
            
         
