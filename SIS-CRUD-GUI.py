@@ -391,7 +391,7 @@ class Ui_MainWindow(object):
         student_data = [idnumber,name,course,yearlevel,gender]
 
         with open(fileName, 'a+',
-         encoding="utf-8") as fileInput:
+         encoding="utf-8",newline="") as fileInput:
                 writer = csv.writer(fileInput)
                 writer.writerows([student_data])
 # A message box that will show that the student was added to the set successfully
@@ -424,7 +424,7 @@ class Ui_MainWindow(object):
                         student_found = True
 
         if student_found is True:
-            with open(fileName, "w", encoding="utf-8") as fileInput:
+            with open(fileName, "w", encoding="utf-8", newline="") as fileInput:
                 writer = csv.writer(fileInput)
                 writer.writerows(updated_data)
             # Message box that shows if the student was deleted succesfully

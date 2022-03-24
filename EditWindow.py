@@ -216,13 +216,13 @@ class Ui_EditWindow(object):
         # Check if the record is found 
         if index_student is not None:
             fileName = 'C:/Users/monti/A-CRUD/students.csv'
-            with open(fileName, "w", encoding="utf-8") as fileInput:
+            with open(fileName, "w", encoding="utf-8",newline="") as fileInput:
                 writer = csv.writer(fileInput)
                 writer.writerows(updated_data)
                 msg=QMessageBox()
                 msg.setWindowTitle("--- Edit a Student ---")
                 msg.setText("Succesfully updated student "+id_number+"")
-                msg.setInformativeText("Updated to student "+ID_Number+"")
+                msg.setInformativeText("Updated to student with an ID Number: "+ID_Number+"")
                 msg.setIcon(QMessageBox.Information)
                 msg.setStandardButtons(QMessageBox.Ok|QMessageBox.Cancel)
                 msg.exec()
