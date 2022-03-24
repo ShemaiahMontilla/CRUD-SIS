@@ -157,17 +157,20 @@ class Ui_MainWindow(object):
 "border-color: rgb(170, 255, 255);")
         self.lineEditIdnumber.setText("")
         self.lineEditIdnumber.setObjectName("lineEditIdnumber")
-        self.lineEditYearlevel = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEditYearlevel.setGeometry(QtCore.QRect(160, 310, 381, 31))
+
+
+        self.YearLevelcomboBox = QtWidgets.QComboBox(self.centralwidget)
+        self.YearLevelcomboBox.setGeometry(QtCore.QRect(160, 310, 161, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
-        font.setBold(False)
-        font.setWeight(50)
-        self.lineEditYearlevel.setFont(font)
-        self.lineEditYearlevel.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"border-color: rgb(170, 255, 255);")
-        self.lineEditYearlevel.setText("")
-        self.lineEditYearlevel.setObjectName("lineEditYearlevel")
+        self.YearLevelcomboBox.setFont(font)
+        self.YearLevelcomboBox.setObjectName("CoursecomboBox")
+        self.YearLevelcomboBox.addItem("")
+        self.YearLevelcomboBox.addItem("")
+        self.YearLevelcomboBox.addItem("")
+        self.YearLevelcomboBox.addItem("")
+
+ 
         self.lineEditCourse = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEditCourse.setGeometry(QtCore.QRect(710, 260, 321, 31))
         font = QtGui.QFont()
@@ -179,6 +182,14 @@ class Ui_MainWindow(object):
 "border-color: rgb(170, 255, 255);")
         self.lineEditCourse.setText("")
         self.lineEditCourse.setObjectName("lineEditCourse")
+
+
+
+
+
+
+        
+        
         self.comboBox = QtWidgets.QComboBox(self.centralwidget)
         self.comboBox.setGeometry(QtCore.QRect(740, 190, 161, 31))
         font = QtGui.QFont()
@@ -187,6 +198,7 @@ class Ui_MainWindow(object):
         self.comboBox.setObjectName("comboBox")
         self.comboBox.addItem("")
         self.comboBox.addItem("")
+
 
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(20, 340, 120, 50))
@@ -261,6 +273,7 @@ class Ui_MainWindow(object):
         self.BtnClear.clicked.connect(self.clear)
 
 
+
         self.lineEditDelete = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEditDelete.setGeometry(QtCore.QRect(730, 850, 281, 41))
         font = QtGui.QFont()
@@ -306,12 +319,19 @@ class Ui_MainWindow(object):
         self.labelCourse.setText(_translate("MainWindow", "Course:"))
         self.comboBox.setItemText(0, _translate("MainWindow", "Male"))
         self.comboBox.setItemText(1, _translate("MainWindow", "Female"))
+
+        self.YearLevelcomboBox.setItemText(0, _translate("MainWindow", "1st Year"))
+        self.YearLevelcomboBox.setItemText(1, _translate("MainWindow", "2nd Year"))
+        self.YearLevelcomboBox.setItemText(2, _translate("MainWindow", "3rd Year"))
+        self.YearLevelcomboBox.setItemText(3, _translate("MainWindow", "4th Year"))
+
         self.pushButton.setText(_translate("MainWindow", "Display All"))
         self.pushButton_2.setText(_translate("MainWindow", "Edit Student"))
         self.lineEditEdit.setPlaceholderText(_translate("MainWindow", "Enter student's id-number to update:"))
         self.pushButton_3.setText(_translate("MainWindow", "Add new student"))
         self.pushButton_4.setText(_translate("MainWindow", "Delete a student"))
         self.BtnClear.setText(_translate("MainWindow", "Clear Table"))
+        
         self.lineEditDelete.setPlaceholderText(_translate("MainWindow", "Enter student's id-number to delete:"))
         
   #Fucntion that will display the dataset from the text file or csv file. It will load the data  
@@ -364,7 +384,7 @@ class Ui_MainWindow(object):
         fileName = 'C:/Users/monti/A-CRUD/students.csv'
         name = self.lineEditName.text()
         idnumber = self.lineEditIdnumber.text()
-        yearlevel = self.lineEditYearlevel.text()
+        yearlevel = self.YearLevelcomboBox.currentText()
         gender = self.comboBox.currentText()
         course = self.lineEditCourse.text()
 
