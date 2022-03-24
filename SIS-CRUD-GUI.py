@@ -67,6 +67,7 @@ class Ui_MainWindow(object):
         self.tableView = QtWidgets.QTableView(self.centralwidget)
         self.tableView.setGeometry(QtCore.QRect(100, 400, 761, 361))
         self.tableView.setObjectName("tableView")
+        self.tableView.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
         #self.tableView.setModel(self.model)
         self.tableView.horizontalHeader().setStretchLastSection(True)
         self.labelSIS = QtWidgets.QLabel(self.centralwidget)
