@@ -11,6 +11,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox, QTableView
+import pandas as pd
 from EditWindow import  Ui_EditWindow
 import csv
 
@@ -65,7 +66,7 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.tableView = QtWidgets.QTableView(self.centralwidget)
-        self.tableView.setGeometry(QtCore.QRect(100, 400, 761, 361))
+        self.tableView.setGeometry(QtCore.QRect(90, 400, 800, 361))
         self.tableView.setObjectName("tableView")
         self.tableView.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
         #self.tableView.setModel(self.model)
@@ -316,6 +317,7 @@ class Ui_MainWindow(object):
   #Fucntion that will display the dataset from the text file or csv file. It will load the data  
     def loadCsv(self):
         fileName = 'C:/Users/monti/A-CRUD/students.csv'
+        
         with open(fileName, "r") as fileInput:
             for row in csv.reader(fileInput):    
                 items = [
@@ -323,6 +325,9 @@ class Ui_MainWindow(object):
                     for field in row
                 ]
                 self.model.appendRow(items)
+
+
+
     #Function that will clear the display on the table
     def clear(self):
         self.model.clear()
@@ -341,7 +346,7 @@ class Ui_MainWindow(object):
                                 msg=QMessageBox()
                                 msg.setWindowTitle("--- SearchS a tudent ---")
                                 msg.setText("ID-Number found in our dataset..")
-                                msg.setInformativeText("ID-Number:  "+row[0]+"\n" "Name:  " +row[1]+ "\n""Course:  "+row[2]+"\n""Year-Leve:  "+row[3]+"\n""Gender:  "+row[4])
+                                msg.setInformativeText("ID-Number:  "+row[0]+"\n" "Name:  " +row[1]+ "\n""Course:  "+row[2]+"\n""Year-Level:  "+row[3]+"\n""Gender:  "+row[4])
                                 msg.setIcon(QMessageBox.Information)
                                 msg.setStandardButtons(QMessageBox.Ok|QMessageBox.Cancel)
                                 msg.exec()
@@ -406,7 +411,7 @@ class Ui_MainWindow(object):
             msg=QMessageBox()
             msg.setWindowTitle("--- Delete a Student ---")
             msg.setText("ID-Number found in our dataset..")
-            msg.setInformativeText("Stdent with an ID-Number: "+ID_number+" was deleted successfully")
+            msg.setInformativeText("Student with an ID-Number: "+ID_number+" was deleted successfully")
             msg.setIcon(QMessageBox.Information)
             msg.setStandardButtons(QMessageBox.Ok|QMessageBox.Cancel)
             msg.exec()

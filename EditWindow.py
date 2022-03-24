@@ -20,18 +20,35 @@ class Ui_EditWindow(object):
         EditWindow.resize(640, 480)
         EditWindow.setStyleSheet("background-color: rgb(255, 240, 210);\n"
 "border-color: rgb(39, 24, 255);")
+
+
         self.centralwidget = QtWidgets.QWidget(EditWindow)
         self.centralwidget.setObjectName("centralwidget")
+
+
+
+
         self.labelID_Number2W = QtWidgets.QLabel(self.centralwidget)
-        self.labelID_Number2W.setGeometry(QtCore.QRect(10, 20, 101, 31))
+        self.labelID_Number2W.setGeometry(QtCore.QRect(10, 70, 101, 31))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
         self.labelID_Number2W.setFont(font)
         self.labelID_Number2W.setObjectName("labelID_Number2W")
+
+        
+        self.labelID_Number3W = QtWidgets.QLabel(self.centralwidget)
+        self.labelID_Number3W.setGeometry(QtCore.QRect(10, 30, 190, 31))
+        font = QtGui.QFont()
+        font.setPointSize(8)
+        font.setBold(False)
+        font.setWeight(75)
+        self.labelID_Number3W.setFont(font)
+        self.labelID_Number3W.setObjectName("labelID_Number3W")
+
         self.labelName2W = QtWidgets.QLabel(self.centralwidget)
-        self.labelName2W.setGeometry(QtCore.QRect(10, 70, 75, 20))
+        self.labelName2W.setGeometry(QtCore.QRect(10, 110, 75, 20))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
@@ -39,7 +56,7 @@ class Ui_EditWindow(object):
         self.labelName2W.setFont(font)
         self.labelName2W.setObjectName("labelName2W")
         self.labelCourse2w = QtWidgets.QLabel(self.centralwidget)
-        self.labelCourse2w.setGeometry(QtCore.QRect(10, 110, 75, 20))
+        self.labelCourse2w.setGeometry(QtCore.QRect(10, 150, 75, 20))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
@@ -47,7 +64,7 @@ class Ui_EditWindow(object):
         self.labelCourse2w.setFont(font)
         self.labelCourse2w.setObjectName("labelCourse2w")
         self.labelYearlevel2W = QtWidgets.QLabel(self.centralwidget)
-        self.labelYearlevel2W.setGeometry(QtCore.QRect(10, 150, 101, 31))
+        self.labelYearlevel2W.setGeometry(QtCore.QRect(10, 190, 101, 31))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
@@ -55,7 +72,7 @@ class Ui_EditWindow(object):
         self.labelYearlevel2W.setFont(font)
         self.labelYearlevel2W.setObjectName("labelYearlevel2W")
         self.labelGender2W = QtWidgets.QLabel(self.centralwidget)
-        self.labelGender2W.setGeometry(QtCore.QRect(10, 200, 75, 20))
+        self.labelGender2W.setGeometry(QtCore.QRect(10, 230, 75, 20))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
@@ -79,7 +96,7 @@ class Ui_EditWindow(object):
 
         
         self.lineEditIDNumber2W = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEditIDNumber2W.setGeometry(QtCore.QRect(120, 20, 241, 31))
+        self.lineEditIDNumber2W.setGeometry(QtCore.QRect(120, 70, 200, 31))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(False)
@@ -87,8 +104,19 @@ class Ui_EditWindow(object):
         self.lineEditIDNumber2W.setFont(font)
         self.lineEditIDNumber2W.setStyleSheet("background-color: rgb(229, 255, 252);")
         self.lineEditIDNumber2W.setObjectName("lineEditIDNumber2W")
+
+        self.lineEditIDNumber3W = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEditIDNumber3W.setGeometry(QtCore.QRect(180, 30, 200, 31))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setWeight(50)
+        self.lineEditIDNumber3W.setFont(font)
+        self.lineEditIDNumber3W.setStyleSheet("background-color: rgb(229, 255, 252);")
+        self.lineEditIDNumber3W.setObjectName("lineEditIDNumber3W")
+
         self.lineEditName2W = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEditName2W.setGeometry(QtCore.QRect(120, 70, 241, 31))
+        self.lineEditName2W.setGeometry(QtCore.QRect(120, 110, 200, 31))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(False)
@@ -97,7 +125,7 @@ class Ui_EditWindow(object):
         self.lineEditName2W.setStyleSheet("background-color: rgb(229, 255, 252);")
         self.lineEditName2W.setObjectName("lineEditName2W")
         self.lineEditYearlevel2W = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEditYearlevel2W.setGeometry(QtCore.QRect(120, 150, 241, 31))
+        self.lineEditYearlevel2W.setGeometry(QtCore.QRect(120, 190, 241, 31))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
@@ -106,7 +134,7 @@ class Ui_EditWindow(object):
         self.lineEditYearlevel2W.setStyleSheet("background-color: rgb(229, 255, 252);")
         self.lineEditYearlevel2W.setObjectName("lineEditYearlevel2W")
         self.lineEditCourse2W = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEditCourse2W.setGeometry(QtCore.QRect(120, 110, 241, 31))
+        self.lineEditCourse2W.setGeometry(QtCore.QRect(120, 150, 241, 31))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(False)
@@ -115,7 +143,7 @@ class Ui_EditWindow(object):
         self.lineEditCourse2W.setStyleSheet("background-color: rgb(229, 255, 252);")
         self.lineEditCourse2W.setObjectName("lineEditCourse2W")
         self.comboBox2W = QtWidgets.QComboBox(self.centralwidget)
-        self.comboBox2W.setGeometry(QtCore.QRect(120, 190, 211, 41))
+        self.comboBox2W.setGeometry(QtCore.QRect(120, 230, 211, 41))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
@@ -140,7 +168,9 @@ class Ui_EditWindow(object):
     def retranslateUi(self, EditWindow):
         _translate = QtCore.QCoreApplication.translate
         EditWindow.setWindowTitle(_translate("EditWindow", "MainWindow"))
-        self.labelID_Number2W.setText(_translate("EditWindow", "ID Number:"))
+        self.labelID_Number2W.setText(_translate("EditWindow", "Updated ID Number:"))
+        self.labelID_Number3W.setText(_translate("EditWindow", "ID Number to be edited:"))
+
         self.labelName2W.setText(_translate("EditWindow", "Name:"))
         self.labelCourse2w.setText(_translate("EditWindow", "Course:"))
         self.labelYearlevel2W.setText(_translate("EditWindow", "Year Level:"))
@@ -153,13 +183,13 @@ class Ui_EditWindow(object):
     def edit_student(self):
 
         fileName = 'C:/Users/monti/A-CRUD/students.csv'
-    
+        id_number = self.lineEditIDNumber3W.text()
         ID_Number = self.lineEditIDNumber2W.text()
         Name = self.lineEditName2W.text()
         Course = self.lineEditCourse2W.text()
         Year_Level =self.lineEditYearlevel2W.text()
         Gender = self.comboBox2W.currentText()
-        student_elements = [ID_Number, Name, Course, Year_Level, Gender]
+
         index_student = None
         updated_data = []
         with open(fileName, "r", encoding="utf-8") as fileInput:
@@ -167,13 +197,18 @@ class Ui_EditWindow(object):
             counter = 0
             for row in reader:
                 if len(row) > 0:
-                    index_student = counter   
-                    student_data = []
-                    for elements in student_elements:
-                        value = elements
-                        student_data.append(value)
-                    updated_data.append(student_data)
-                counter += 1
+                    if id_number == row[0]:
+                        index_student = counter   
+                        student_data = []
+                        student_data.append(ID_Number)
+                        student_data.append(Name)
+                        student_data.append(Course)
+                        student_data.append(Year_Level)
+                        student_data.append(Gender)
+                        updated_data.append(student_data)
+                    else:
+                        updated_data.append(row)
+                    counter += 1
                     
 
 
@@ -186,8 +221,8 @@ class Ui_EditWindow(object):
                 writer.writerows(updated_data)
                 msg=QMessageBox()
                 msg.setWindowTitle("--- Edit a Student ---")
-                msg.setText("Succesfully updated student "+ID_Number+"")
-                msg.setInformativeText("Updated student "+ID_Number+"")
+                msg.setText("Succesfully updated student "+id_number+"")
+                msg.setInformativeText("Updated to student "+ID_Number+"")
                 msg.setIcon(QMessageBox.Information)
                 msg.setStandardButtons(QMessageBox.Ok|QMessageBox.Cancel)
                 msg.exec()
