@@ -225,6 +225,11 @@ class Ui_EditWindow(object):
                 msg.setInformativeText("Updated to student with an ID Number: "+ID_Number+"")
                 msg.setIcon(QMessageBox.Information)
                 msg.setStandardButtons(QMessageBox.Ok|QMessageBox.Cancel)
+                font=QtGui.QFont()
+                font.setPointSize(12)
+                font.setBold(True)
+                font.setWeight(75)
+                msg.setFont(font)
                 msg.exec()
                 
     
