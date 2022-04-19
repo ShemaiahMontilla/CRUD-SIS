@@ -124,15 +124,25 @@ class Ui_EditWindow(object):
         self.lineEditName2W.setFont(font)
         self.lineEditName2W.setStyleSheet("background-color: rgb(229, 255, 252);")
         self.lineEditName2W.setObjectName("lineEditName2W")
-        self.lineEditYearlevel2W = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEditYearlevel2W.setGeometry(QtCore.QRect(120, 190, 241, 31))
+
+
+        self.comboBoxYearLevel = QtWidgets.QComboBox(self.centralwidget)
+        self.comboBoxYearLevel.setGeometry(QtCore.QRect(120, 190, 241, 31))
         font = QtGui.QFont()
         font.setPointSize(10)
-        font.setBold(True)
-        font.setWeight(75)
-        self.lineEditYearlevel2W.setFont(font)
-        self.lineEditYearlevel2W.setStyleSheet("background-color: rgb(229, 255, 252);")
-        self.lineEditYearlevel2W.setObjectName("lineEditYearlevel2W")
+        font.setBold(False)
+        font.setWeight(50)
+        self.comboBoxYearLevel.setFont(font)
+        self.comboBoxYearLevel.setStyleSheet("background-color: rgb(229, 255, 252);\n"
+        "border :2px solid ;\n"
+        "border-radius:2px;\n"
+        "border-color:black;\n")
+        self.comboBoxYearLevel.setObjectName("comboBoxYearLevel")
+        self.comboBoxYearLevel.addItem("")
+        self.comboBoxYearLevel.addItem("")
+        self.comboBoxYearLevel.addItem("")
+        self.comboBoxYearLevel.addItem("")
+
         self.lineEditCourse2W = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEditCourse2W.setGeometry(QtCore.QRect(120, 150, 241, 31))
         font = QtGui.QFont()
@@ -167,7 +177,7 @@ class Ui_EditWindow(object):
 #Function for retanslateUI, it set the text for the button, input widgets and etc
     def retranslateUi(self, EditWindow):
         _translate = QtCore.QCoreApplication.translate
-        EditWindow.setWindowTitle(_translate("EditWindow", "MainWindow"))
+        EditWindow.setWindowTitle(_translate("EditWindow", "Edit Window"))
         self.labelID_Number2W.setText(_translate("EditWindow", "Updated ID Number:"))
         self.labelID_Number3W.setText(_translate("EditWindow", "ID Number to be edited:"))
 
@@ -176,6 +186,12 @@ class Ui_EditWindow(object):
         self.labelYearlevel2W.setText(_translate("EditWindow", "Year Level:"))
         self.labelGender2W.setText(_translate("EditWindow", "Gender:"))
         self.pushButtonUpdate.setText(_translate("EditWindow", "Update"))
+
+        self.comboBoxYearLevel.setItemText(0, _translate("AddWindow", "1st Year"))
+        self.comboBoxYearLevel.setItemText(1, _translate("AddWindow", "2nd Year"))
+        self.comboBoxYearLevel.setItemText(2, _translate("AddWindow", "3rd Year"))
+        self.comboBoxYearLevel.setItemText(3, _translate("AddWindow", "4th Year"))
+        
         self.comboBox2W.setItemText(0, _translate("EditWindow", "Male"))
         self.comboBox2W.setItemText(1, _translate("EditWindow", "Female"))
  
@@ -187,7 +203,7 @@ class Ui_EditWindow(object):
         ID_Number = self.lineEditIDNumber2W.text()
         Name = self.lineEditName2W.text()
         Course = self.lineEditCourse2W.text()
-        Year_Level =self.lineEditYearlevel2W.text()
+        Year_Level =self.comboBoxYearLevel.currentText()
         Gender = self.comboBox2W.currentText()
 
         index_student = None
