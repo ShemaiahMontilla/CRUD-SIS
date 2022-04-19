@@ -11,9 +11,14 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox, QTableView
+from PyQt5.QtCore import Qt, QSortFilterProxyModel
 import pandas as pd
 from EditWindow import  Ui_EditWindow
+from AddWindow import  Ui_AddWindow
+
 import csv
+
+
 
 # The class for the Ui_MainWindow
 class Ui_MainWindow(object):
@@ -56,6 +61,18 @@ class Ui_MainWindow(object):
             msg.setStandardButtons(QMessageBox.Ok|QMessageBox.Cancel)
             msg.exec()  
 
+    
+    def openAddWindow(self):
+        self.window =QtWidgets.QMainWindow()
+        self.ui = Ui_AddWindow()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+
+        
+
+        
+
                     
                         
 #Function for the setupUI , setting of the UI buttons,Input widgets , table view and etc
@@ -65,225 +82,152 @@ class Ui_MainWindow(object):
         MainWindow.setStyleSheet("background-color: rgb(251, 233, 255);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.tableView = QtWidgets.QTableView(self.centralwidget)
-        self.tableView.setGeometry(QtCore.QRect(300, 400, 1100, 361))
-        self.tableView.setStyleSheet("font: 12pt \"MS Shell Dlg 2\";")
-        self.tableView.setObjectName("tableView")
-        self.tableView.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
-        #self.tableView.setModel(self.model)
-        self.tableView.horizontalHeader().setStretchLastSection(True)
+
+
+
+
+
         self.labelSIS = QtWidgets.QLabel(self.centralwidget)
-        self.labelSIS.setGeometry(QtCore.QRect(500, 30, 821, 61))
+        self.labelSIS.setGeometry(QtCore.QRect(550, 30, 821, 70))
         font = QtGui.QFont()
         font.setFamily("Lucida Calligraphy")
         font.setPointSize(22)
         self.labelSIS.setFont(font)
-        self.labelSIS.setStyleSheet("background-color: rgb(108, 255, 255);")
+        self.labelSIS.setStyleSheet("background-color: rgb(108, 255, 255);\n"
+        "border :5px solid ;\n"
+        "border-radius:5px;\n"
+        "border-color:blue;\n"
+        "padding:6px")
         self.labelSIS.setAlignment(QtCore.Qt.AlignCenter)
         self.labelSIS.setObjectName("labelSIS")
-        self.pushButtonSearch = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonSearch.setGeometry(QtCore.QRect(380, 120, 111, 31))
-        font = QtGui.QFont()
-        font.setPointSize(14)
-        font.setBold(True)
-        font.setWeight(75)
-        self.pushButtonSearch.setFont(font)
-        self.pushButtonSearch.setStyleSheet("background-color: rgb(192, 255, 213);")
-        self.pushButtonSearch.setObjectName("pushButtonSearch")
-        self.pushButtonSearch.clicked.connect(self.search_student)
-        
-        self.lineEditSearch = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEditSearch.setGeometry(QtCore.QRect(500, 120, 541, 31))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.lineEditSearch.setFont(font)
-        self.lineEditSearch.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"border-color: rgb(48, 255, 249);")
-        self.lineEditSearch.setText("")
-        self.lineEditSearch.setObjectName("lineEditSearch")
-        self.labelName = QtWidgets.QLabel(self.centralwidget)
-        self.labelName.setGeometry(QtCore.QRect(350, 180, 91, 41))
-        font = QtGui.QFont()
-        font.setFamily("MS UI Gothic")
-        font.setPointSize(16)
-        self.labelName.setFont(font)
-        self.labelName.setObjectName("labelName")
-        self.labelidnumber = QtWidgets.QLabel(self.centralwidget)
-        self.labelidnumber.setGeometry(QtCore.QRect(300, 240, 131, 41))
-        font = QtGui.QFont()
-        font.setFamily("MS UI Gothic")
-        font.setPointSize(16)
-        self.labelidnumber.setFont(font)
-        self.labelidnumber.setObjectName("labelidnumber")
-        self.labelYearlevel = QtWidgets.QLabel(self.centralwidget)
-        self.labelYearlevel.setGeometry(QtCore.QRect(300, 300, 131, 41))
-        font = QtGui.QFont()
-        font.setFamily("MS UI Gothic")
-        font.setPointSize(16)
-        self.labelYearlevel.setFont(font)
-        self.labelYearlevel.setObjectName("labelYearlevel")
-        self.labelGender = QtWidgets.QLabel(self.centralwidget)
-        self.labelGender.setGeometry(QtCore.QRect(900, 180, 91, 41))
-        font = QtGui.QFont()
-        font.setFamily("MS UI Gothic")
-        font.setPointSize(16)
-        self.labelGender.setFont(font)
-        self.labelGender.setObjectName("labelGender")
-        self.labelCourse = QtWidgets.QLabel(self.centralwidget)
-        self.labelCourse.setGeometry(QtCore.QRect(900, 250, 91, 41))
-        font = QtGui.QFont()
-        font.setFamily("MS UI Gothic")
-        font.setPointSize(16)
-        self.labelCourse.setFont(font)
-        self.labelCourse.setObjectName("labelCourse")
-        self.lineEditName = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEditName.setGeometry(QtCore.QRect(450, 190, 381, 31))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        font.setBold(False)
-        font.setWeight(50)
-        self.lineEditName.setFont(font)
-        self.lineEditName.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"border-color: rgb(170, 255, 255);")
-        self.lineEditName.setText("")
-        self.lineEditName.setObjectName("lineEditName")
-        self.lineEditIdnumber = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEditIdnumber.setGeometry(QtCore.QRect(450, 250, 381, 31))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        font.setBold(False)
-        font.setWeight(50)
-        self.lineEditIdnumber.setFont(font)
-        self.lineEditIdnumber.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"border-color: rgb(170, 255, 255);")
-        self.lineEditIdnumber.setText("")
-        self.lineEditIdnumber.setObjectName("lineEditIdnumber")
 
 
-        self.YearLevelcomboBox = QtWidgets.QComboBox(self.centralwidget)
-        self.YearLevelcomboBox.setGeometry(QtCore.QRect(450, 310, 161, 31))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.YearLevelcomboBox.setFont(font)
-        self.YearLevelcomboBox.setObjectName("CoursecomboBox")
-        self.YearLevelcomboBox.addItem("")
-        self.YearLevelcomboBox.addItem("")
-        self.YearLevelcomboBox.addItem("")
-        self.YearLevelcomboBox.addItem("")
-
- 
-        self.lineEditCourse = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEditCourse.setGeometry(QtCore.QRect(1000, 260, 321, 31))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        font.setBold(False)
-        font.setWeight(50)
-        self.lineEditCourse.setFont(font)
-        self.lineEditCourse.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"border-color: rgb(170, 255, 255);")
-        self.lineEditCourse.setText("")
-        self.lineEditCourse.setObjectName("lineEditCourse")
-
-
-
-
-
-
-        
-        
-        self.comboBox = QtWidgets.QComboBox(self.centralwidget)
-        self.comboBox.setGeometry(QtCore.QRect(1000, 190, 161, 31))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.comboBox.setFont(font)
-        self.comboBox.setObjectName("comboBox")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-
-
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(300, 340, 120, 50))
+        self.labelSearch = QtWidgets.QLabel(self.centralwidget)
+        self.labelSearch.setGeometry(QtCore.QRect(350, 400, 120, 45))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
-        self.pushButton.setFont(font)
-        self.pushButton.setStyleSheet("background-color: rgb(175, 255, 166);\n"
-"border-color: rgb(0, 255, 255);")
-        self.pushButton.setObjectName("pushButton")
-        self.pushButton.clicked.connect(self.loadCsv)
+        self.labelSearch.setFont(font)
+        self.labelSearch.setStyleSheet("background-color: rgb(108, 255, 255);\n"
+        "border :5px solid ;\n"
+        "border-radius:5px;\n"
+        "border-color:blue;\n"
+        "padding:6px")
+        self.labelSearch.setAlignment(QtCore.Qt.AlignCenter)
+        self.labelSearch.setObjectName("labelSearch")
 
 
 
-        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget, clicked = lambda:self.openEditWindow())
-        self.pushButton_2.setGeometry(QtCore.QRect(420, 840, 161, 61))
+        self.ButtonDisplay = QtWidgets.QPushButton(self.centralwidget)
+        self.ButtonDisplay.setGeometry(QtCore.QRect(350, 340, 120, 50))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.ButtonDisplay.setFont(font)
+        self.ButtonDisplay.setStyleSheet("background-color: skyblue;\n""color:white;\n"
+        "border :5px solid ;\n"
+        "border-radius:10px;\n"
+        "border-color:skyblue;\n"
+        "padding:6px")
+        "border-color: rgb(0, 255, 255);"
+        self.ButtonDisplay.setObjectName("ButtonDisplay")
+        self.ButtonDisplay.clicked.connect(self.loadCsv)
+
+
+
+        self.ButtonEdit = QtWidgets.QPushButton(self.centralwidget, clicked = lambda:self.openEditWindow())
+        self.ButtonEdit.setGeometry(QtCore.QRect(370, 240, 161, 61))
         font = QtGui.QFont()
         font.setPointSize(12)
         font.setBold(True)
         font.setWeight(75)
-        self.pushButton_2.setFont(font)
-        self.pushButton_2.setStyleSheet("background-color: rgb(175, 255, 166);\n"
-"border-color: rgb(0, 255, 255);")
-        self.pushButton_2.setObjectName("pushButton_2")
+        self.ButtonEdit.setFont(font)
+        self.ButtonEdit.setStyleSheet("background-color: rgb(255, 170, 255);\n"
+        "border :5px solid ;\n"
+        "border-radius:10px;\n"
+        "border-color:black;\n"
+        "padding:6px")
+        "border-color: rgb(73, 76, 255);"
+        self.ButtonEdit.setObjectName("pushButton_2")
         
 
         self.lineEditEdit = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEditEdit.setGeometry(QtCore.QRect(600, 850, 281, 41 ))
+        self.lineEditEdit.setGeometry(QtCore.QRect(533, 250, 281, 41 ))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.lineEditEdit.setFont(font)
         self.lineEditEdit.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"border-color: rgb(48, 255, 249);")
+        "border :2px solid ;\n"
+        "border-radius:2px;\n"
+        "border-color:black;\n")
         self.lineEditEdit.setText("")
         self.lineEditEdit.setObjectName("lineEditEdit")
 
-        self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_3.setGeometry(QtCore.QRect(1100, 320, 171, 61))
+        self.ButtonAdd= QtWidgets.QPushButton(self.centralwidget, clicked = lambda:self.openAddWindow())
+        self.ButtonAdd.setGeometry(QtCore.QRect(1350, 240, 175, 61))
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
         font.setWeight(75)
-        self.pushButton_3.setFont(font)
-        self.pushButton_3.setStyleSheet("background-color: rgb(175, 255, 166);\n"
-"border-color: rgb(0, 255, 255);")
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.pushButton_3.clicked.connect(self.add_student)
+        self.ButtonAdd.setFont(font)
+        self.ButtonAdd.setStyleSheet("background-color: rgb(170, 170, 255);\n"
+        "border :5px solid ;\n"
+        "border-radius:10px;\n"
+        "border-color:blue;\n"
+        "padding:6px")
+        "border-color: rgb(73, 76, 255);"
+       
+        self.ButtonAdd.setObjectName("pushButton_3")
+       # self.ButtonAdd.clicked.connect(self.add_student)
 
-        self.pushButton_4 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_4.setGeometry(QtCore.QRect(900, 840, 191, 61))
+        self.ButtonDelete= QtWidgets.QPushButton(self.centralwidget)
+        self.ButtonDelete.setGeometry(QtCore.QRect(850, 240, 191, 61))
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
         font.setWeight(75)
-        self.pushButton_4.setFont(font)
-        self.pushButton_4.setStyleSheet("background-color: rgb(175, 255, 166);\n"
-"border-color: rgb(0, 255, 255);")
-        self.pushButton_4.setObjectName("pushButton_4")
-        self.pushButton_4.clicked.connect(self.delete_student)
+        self.ButtonDelete.setFont(font)
+        self.ButtonDelete.setStyleSheet("background-color: rgb(255, 170, 255);\n"
+        "border :5px solid ;\n"
+        "border-radius:10px;\n"
+        "border-color:black;\n"
+        "padding:6px")
+        "border-color: rgb(73, 76, 255);"
+        self.ButtonDelete.setObjectName("pushButton_4")
+        self.ButtonDelete.clicked.connect(self.delete_student)
+
+        self.lineEditDelete = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEditDelete.setGeometry(QtCore.QRect(1043, 250, 281, 41))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.lineEditDelete.setFont(font)
+        self.lineEditDelete.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+        "border :2px solid ;\n"
+        "border-radius:2px;\n"
+        "border-color:black;\n")
+        self.lineEditDelete.setText("")
+        self.lineEditDelete.setObjectName("lineEditDelete")
 
         self.BtnClear = QtWidgets.QPushButton(self.centralwidget)
-        self.BtnClear.setGeometry(QtCore.QRect(500, 350, 110, 35))
+        self.BtnClear.setGeometry(QtCore.QRect(500, 340, 120, 50))
         font = QtGui.QFont()
-        font.setPointSize(9)
+        font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
         self.BtnClear.setFont(font)
-        self.BtnClear.setStyleSheet("background-color: rgb(175, 255, 166);\n"
-"border-color: rgb(0, 255, 255);")
+        self.BtnClear.setStyleSheet("background-color: skyblue;\n""color:white;\n"
+        "border :5px solid ;\n"
+        "border-radius:10px;\n"
+        "border-color:skyblue;\n"
+        "padding:6px")
         self.BtnClear.setObjectName("BtnClear")
         self.BtnClear.clicked.connect(self.clear)
 
 
 
-        self.lineEditDelete = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEditDelete.setGeometry(QtCore.QRect(1100, 850, 281, 41))
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.lineEditDelete.setFont(font)
-        self.lineEditDelete.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"border-color: rgb(48, 255, 249);")
-        self.lineEditDelete.setText("")
-        self.lineEditDelete.setObjectName("lineEditDelete")
+
 
 
 
@@ -304,33 +248,50 @@ class Ui_MainWindow(object):
 
         self.model = QtGui.QStandardItemModel(MainWindow)
         self.model.setHorizontalHeaderLabels(['ID Number', 'Name', 'Course', 'Year', 'Gender'])
-        self.tableView.setModel(self.model)
+
+
+        self.filter_proxy_model =QtCore.QSortFilterProxyModel(self.centralwidget)
+        self.filter_proxy_model.setSourceModel(self.model)
+        self.filter_proxy_model.setFilterCaseSensitivity(Qt.CaseInsensitive)
+        self.filter_proxy_model.setFilterKeyColumn(0)
+
+        self.search_field = QtWidgets.QLineEdit(self.centralwidget)
+        self.search_field.setGeometry(QtCore.QRect(471, 400, 1181, 41 ))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.search_field.setFont(font)          
+        self.search_field.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+        "border :2px solid ;\n"
+        "border-radius:2px;\n"
+        "border-color:black;\n")
+        self.search_field.textChanged.connect(self.filter_proxy_model.setFilterRegExp)
+        self.search_field.setPlaceholderText("Search by ID -Number")
+       
+
+        self.tableView = QtWidgets.QTableView(self.centralwidget)
+        self.tableView.setGeometry(QtCore.QRect(350, 450, 1300, 461))
+        self.tableView.setStyleSheet("font: 12pt \"MS Shell Dlg 2\";")
+        self.tableView.setObjectName("tableView")
+        self.tableView.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
+        self.tableView.setModel(self.filter_proxy_model)
+        #self.tableView.setModel(self.model)
+        self.tableView.horizontalHeader().setStretchLastSection(True)
 
 #Function for retanslateUI, it set the text for the button, input widgets and etc
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.labelSIS.setText(_translate("MainWindow", "Simple Student Information System"))
-        self.pushButtonSearch.setText(_translate("MainWindow", "Search"))
-        self.lineEditSearch.setPlaceholderText(_translate("MainWindow", "Search by ID -Number"))
-        self.labelName.setText(_translate("MainWindow", "Name:"))
-        self.labelidnumber.setText(_translate("MainWindow", "ID Number:"))
-        self.labelYearlevel.setText(_translate("MainWindow", "Year Level:"))
-        self.labelGender.setText(_translate("MainWindow", "Gender:"))
-        self.labelCourse.setText(_translate("MainWindow", "Course:"))
-        self.comboBox.setItemText(0, _translate("MainWindow", "Male"))
-        self.comboBox.setItemText(1, _translate("MainWindow", "Female"))
 
-        self.YearLevelcomboBox.setItemText(0, _translate("MainWindow", "1st Year"))
-        self.YearLevelcomboBox.setItemText(1, _translate("MainWindow", "2nd Year"))
-        self.YearLevelcomboBox.setItemText(2, _translate("MainWindow", "3rd Year"))
-        self.YearLevelcomboBox.setItemText(3, _translate("MainWindow", "4th Year"))
+        self.labelSearch.setText(_translate("MainWindow",  "Search"))
+        
 
-        self.pushButton.setText(_translate("MainWindow", "Display All"))
-        self.pushButton_2.setText(_translate("MainWindow", "Edit Student"))
+
+        self.ButtonDisplay.setText(_translate("MainWindow", "Display All"))
+        self.ButtonEdit.setText(_translate("MainWindow", "Edit Student"))
         self.lineEditEdit.setPlaceholderText(_translate("MainWindow", "Enter student's id-number to update:"))
-        self.pushButton_3.setText(_translate("MainWindow", "Add new student"))
-        self.pushButton_4.setText(_translate("MainWindow", "Delete a student"))
+        self.ButtonAdd.setText(_translate("MainWindow", "Add new student"))
+        self.ButtonDelete.setText(_translate("MainWindow", "Delete a student"))
         self.BtnClear.setText(_translate("MainWindow", "Clear Table"))
         
         self.lineEditDelete.setPlaceholderText(_translate("MainWindow", "Enter student's id-number to delete:"))
@@ -390,37 +351,41 @@ class Ui_MainWindow(object):
                 font.setWeight(75)
                 msg.setFont(font)
                 msg.exec()
+
+        
+        
+
    #A function that will add the student in the data set
-    def add_student(self):
-        fileName = 'C:/Users/monti/A-CRUD/students.csv'
-        name = self.lineEditName.text()
-        idnumber = self.lineEditIdnumber.text()
-        yearlevel = self.YearLevelcomboBox.currentText()
-        gender = self.comboBox.currentText()
-        course = self.lineEditCourse.text()
+   # def add_student(self):
+        #fileName = 'C:/Users/monti/A-CRUD/students.csv'
+        #name = self.lineEditName.text()
+        #idnumber = self.lineEditIdnumber.text()
+        #yearlevel = self.YearLevelcomboBox.currentText()
+        #gender = self.comboBox.currentText()
+        #course = self.lineEditCourse.text()
 
-        student_data = [idnumber,name,course,yearlevel,gender]
+        #student_data = [idnumber,name,course,yearlevel,gender]
 
-        with open(fileName, 'a+',
-         encoding="utf-8",newline="") as fileInput:
-                writer = csv.writer(fileInput)
-                writer.writerows([student_data])
+        #with open(fileName, 'a+',
+         #encoding="utf-8",newline="") as fileInput:
+                #writer = csv.writer(fileInput)
+                #writer.writerows([student_data])
 # A message box that will show that the student was added to the set successfully
-        msg=QMessageBox()
-        msg.setWindowTitle("--- Add a Student ---")
-        msg.setText("Data saved successfully")
-        msg.setIcon(QMessageBox.Information)
-        msg.setStandardButtons(QMessageBox.Ok|QMessageBox.Cancel)
-        font=QtGui.QFont()
-        font.setPointSize(12)
-        font.setBold(True)
-        font.setWeight(75)
-        msg.setFont(font)
-        msg.exec()
+        #msg=QMessageBox()
+        #msg.setWindowTitle("--- Add a Student ---")
+        #msg.setText("Data saved successfully")
+        #msg.setIcon(QMessageBox.Information)
+        #msg.setStandardButtons(QMessageBox.Ok|QMessageBox.Cancel)
+        #font=QtGui.QFont()
+        #font.setPointSize(12)
+        #font.setBold(True)
+        #font.setWeight(75)
+        #msg.setFont(font)
+        #msg.exec()
         
 
                 
-        return
+        
  
 #A function that will delete a student from the data set
     def delete_student(self):
@@ -438,6 +403,7 @@ class Ui_MainWindow(object):
                         counter += 1
                     else:
                         student_found = True
+        
 
         if student_found is True:
             with open(fileName, "w", encoding="utf-8", newline="") as fileInput:
@@ -469,6 +435,19 @@ class Ui_MainWindow(object):
             font.setWeight(75)
             msg.setFont(font)
             msg.exec()
+        
+        self.model.clear()
+
+        fileName = 'C:/Users/monti/A-CRUD/students.csv'
+        
+        with open(fileName, "r") as fileInput:
+            for row in csv.reader(fileInput):    
+                items = [
+                    QtGui.QStandardItem(field)
+                    for field in row
+                ]
+                self.model.appendRow(items)
+
 
 ########################  The Edit/Update operation is in the 2nd python file for the 2nd or EDIT window   ##############################
            
@@ -486,3 +465,4 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+# The class for the Ui_EditWindow, the 2nd window
