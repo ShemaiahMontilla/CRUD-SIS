@@ -150,11 +150,11 @@ class Ui_MainWindow(object):
         "border-color:black;\n"
         "padding:6px")
         "border-color: rgb(73, 76, 255);"
-        self.ButtonEdit.setObjectName("pushButton_2")
+        self.ButtonEdit.setObjectName("ButtonEdit")
         
 
         self.lineEditEdit = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEditEdit.setGeometry(QtCore.QRect(533, 250, 281, 41 ))
+        self.lineEditEdit.setGeometry(QtCore.QRect(533, 250, 283, 41 ))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.lineEditEdit.setFont(font)
