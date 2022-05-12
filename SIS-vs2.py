@@ -18,8 +18,9 @@ from datetime import date
 from DB_Connection import con,mycursor
 from datetime import datetime
 
-
+# The class for the Ui_MainWindow
 class Ui_MainWindow(object):
+    #Function for the setupUI , setting of the UI buttons,Input widgets , table widgets and etc
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1500, 800)
@@ -391,6 +392,7 @@ class Ui_MainWindow(object):
         self.tabWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+#Function for retanslateUI, it set the text for the button, input widgets and etc
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -477,10 +479,11 @@ class Ui_MainWindow(object):
 
 
 
-    
+#Function for filling up / Displaying the table widget  for the table Students_info from the database   
+
     def Tablefill(self):
         self.tableWidget.setColumnCount(0)
-        sql = ("SELECT * FROM students_info")
+        sql = ("SELECT * FROM students_info4")
         mycursor.execute(sql)
         all_data = mycursor.fetchall()
         self.tableWidget.setRowCount(len(all_data[1]))
@@ -503,10 +506,10 @@ class Ui_MainWindow(object):
                 self.tableWidget.setItem(Row,Column, QTableWidgetItem(str(value)))
             row_position = self.tableWidget.rowCount()
             self.tableWidget.insertRow(row_position)
-
+#Function for filling up / Displaying the table widget  for the table Course from the database   
     def Tablefill1(self):
         self.tableWidget1.setColumnCount(0)
-        sql = ("SELECT * FROM course")
+        sql = ("SELECT * FROM courses")
         mycursor.execute(sql)
         all_data1 = mycursor.fetchall()
         self.tableWidget1.setRowCount(len(all_data1[1]))
@@ -528,16 +531,18 @@ class Ui_MainWindow(object):
             row_position = self.tableWidget1.rowCount()
             self.tableWidget1.insertRow(row_position)
 
+#Function for adding students into the students_info table
+
     def InsertPeople(self):
         #print("date")
         stID = self.lineEdit.text()
         stName = self.lineEdit_2.text()
         stgender =  self.comboBoxGender.currentText()
         styearlevel =  self.comboBoxYearLevel.currentText()
-        stcoursecode =  self.comboBoxCoursecode.Text()
+        stcoursecode =  self.comboBoxCoursecode.currentText()
 
 
-        sql = ("INSERT INTO students_info (studentsID,studentsName,gender,yearlevel,coursecode)"
+        sql = ("INSERT INTO students_info4 (studentsID,studentsName,gender,yearlevel,coursecode)"
  					"VALUES (%s,%s,%s,%s,%s)")
 
         value = [stID, stName, stgender, styearlevel, stcoursecode]
@@ -545,14 +550,27 @@ class Ui_MainWindow(object):
         con.commit()
 
         self.Tablefill()
-    
+        msg=QMessageBox()
+        msg.setWindowTitle("--- Add a Student ---")
+        msg.setText("Succesfully Added a Student with a student ID :"+stID+"")
+        msg.setInformativeText("Added student with a Student ID: "+stID+"")
+        msg.setIcon(QMessageBox.Information)
+        msg.setStandardButtons(QMessageBox.Ok|QMessageBox.Cancel)
+        font=QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        msg.setFont(font)
+        msg.exec()
+
+ #Function for adding course into table couurse     
     def InsertCourse(self):
         #print("date")
         coursecode = self.coursecodelineEdit.text()
         course = self.courselineEdit.text()
 
 
-        sql = ("INSERT INTO course(coursecode, course)"
+        sql = ("INSERT INTO courses(coursecode, course)"
  					"VALUES (%s,%s)")
 
         value = [coursecode, course]
@@ -560,9 +578,21 @@ class Ui_MainWindow(object):
         con.commit()
 
         self.Tablefill1()
+        msg=QMessageBox()
+        msg.setWindowTitle("--- Add a Course ---")
+        msg.setText("Succesfully Added a Course with a course code :"+coursecode+"")
+        msg.setInformativeText("Added Course with a course code: "+coursecode+"")
+        msg.setIcon(QMessageBox.Information)
+        msg.setStandardButtons(QMessageBox.Ok|QMessageBox.Cancel)
+        font=QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        msg.setFont(font)
+        msg.exec()
 
 
-
+#Function for the search field of the table students_info
     def filter(self, filter_text):
         for i in range(self.tableWidget.rowCount()):
             for j in range(self.tableWidget.columnCount()):
@@ -573,6 +603,7 @@ class Ui_MainWindow(object):
                     if not match:
                         break
 
+#Function for the search field of the table course
     def filter1(self, filter_text):
         for i in range(self.tableWidget1.rowCount()):
             for j in range(self.tableWidget1.columnCount()):
@@ -582,9 +613,11 @@ class Ui_MainWindow(object):
                     self.tableWidget1.setRowHidden(i, match)
                     if not match:
                         break
+
+#Function for deleting students in the students_info table
     def delete_ppl(self):
         idSearch = self.lineEdit_4.text()
-        sql = (f"DELETE FROM students_info WHERE studentsID = '{idSearch}'")
+        sql = (f"DELETE FROM students_info4 WHERE studentsID = '{idSearch}'")
         mycursor.execute(sql)
         con.commit()
         self.Tablefill()
@@ -601,9 +634,10 @@ class Ui_MainWindow(object):
         msg.setFont(font)
         msg.exec()
 
+#Function for deleting course in the course table
     def delete_crs(self):
         coursecode2 =  self.lineEditCourseCode.text()
-        sql = (f"DELETE FROM course WHERE coursecode = '{coursecode2}'")
+        sql = (f"DELETE FROM courses WHERE coursecode = '{coursecode2}'")
         mycursor.execute(sql)
         con.commit()
         self.Tablefill1()
@@ -620,6 +654,7 @@ class Ui_MainWindow(object):
         msg.setFont(font)
         msg.exec()
 
+#Function for updating students in the students_info table
     def Update_ppl(self):
         idSearch = self.lineEdit_4.text()
         studentID1 = self.StudentsIDlineEdit_5.text()
@@ -627,7 +662,7 @@ class Ui_MainWindow(object):
         gender1 = self.comboBoxGender1.currentText()
         yearlevel1 = self.comboBoxYearLevel1.currentText()
         coursecode1 = self.comboBoxCoursecode1.currentText()
-        sql = (f"UPDATE students_info SET studentsID= '{studentID1}', studentsName= '{Name1}' , gender = '{gender1}' , yearlevel = '{yearlevel1}', coursecode '{coursecode1}'WHERE studentsID = '{idSearch}'")
+        sql = (f"UPDATE students_info4 SET studentsID= '{studentID1}', studentsName= '{Name1}' , gender = '{gender1}' , yearlevel = '{yearlevel1}', coursecode '{coursecode1}'WHERE studentsID = '{idSearch}'")
         mycursor.execute(sql)
         con.commit()
         self.Tablefill()
@@ -644,20 +679,22 @@ class Ui_MainWindow(object):
         msg.setFont(font)
         msg.exec()
 
+
+#Function for updtaing course in the course table
     def Update_crs(self):
         coursecode2 =  self.lineEditCourseCode.text()
         coursecodeEdited =  self.CoursCodelineEdit_5.text()
         courseEdited = self.EditCourselineEdit.text()
        
 
-        sql = (f"UPDATE course SET coursecode= '{coursecodeEdited}', course = '{courseEdited}'WHERE coursecode = '{coursecode2}'")
+        sql = (f"UPDATE courses SET coursecode= '{coursecodeEdited}', course = '{courseEdited}'WHERE coursecode = '{coursecode2}'")
         mycursor.execute(sql)
         con.commit()
         self.Tablefill()
         msg=QMessageBox()
         msg.setWindowTitle("--- Edit a Course ---")
         msg.setText("Succesfully updated Course with a course code :"+coursecode2+"")
-        msg.setInformativeText("Updated to student with an course code: "+coursecode2+"")
+        msg.setInformativeText("Updated to student with an course code: "+coursecodeEdited+"")
         msg.setIcon(QMessageBox.Information)
         msg.setStandardButtons(QMessageBox.Ok|QMessageBox.Cancel)
         font=QtGui.QFont()
