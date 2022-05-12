@@ -1,5 +1,5 @@
 
-   
+#Connection for the Database   
 import mysql.connector
 
 class DB_Connect:
@@ -11,7 +11,7 @@ class DB_Connect:
 		  host="localhost",
 		  user="root",
 		  password="AuntJoy@0329",
-		  database="students3"
+		  database="students5"
 		)
 		return self.con
 
