@@ -474,7 +474,7 @@ class Ui_MainWindow(object):
         self.comboBoxYearLevel1.setItemText(2, _translate("MainWindow", "3rd Year"))
         self.comboBoxYearLevel1.setItemText(3, _translate("MainWindow", "4th Year"))
         
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("MainWindow", "SEARCH, DELETE AND UPDATE"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("MainWindow", "DELETE AND UPDATE"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("MainWindow", "COURSE TABLE"))
 
 
@@ -666,6 +666,7 @@ class Ui_MainWindow(object):
         mycursor.execute(sql)
         con.commit()
         self.Tablefill()
+        self.Tablefill1()
         msg=QMessageBox()
         msg.setWindowTitle("--- Edit a Student ---")
         msg.setText("Succesfully updated student "+idSearch+"")
