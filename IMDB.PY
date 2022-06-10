@@ -668,7 +668,7 @@ class Ui_MainWindow(object):
             for row in range(self.tableWidget.rowCount()):
                 self.tableWidget.setRowHeight(row, 100)
 
-#Function for the search field of the table students_info
+#Function for the search field of Movie
     def filter(self, filter_text):
         for i in range(self.tableWidget.rowCount()):
             for j in range(self.tableWidget.columnCount()):
@@ -681,18 +681,19 @@ class Ui_MainWindow(object):
 
     def Tablefill2(self):
         self.tableWidget2.setColumnCount(0)
-        sql = ("SELECT Movie.title, Actor.name, Acts.CharacterPlayed, Actor.ActorID FROM Movie, Actor, Acts WHERE Movie.MovieID = Acts.MovieID AND Acts.ActorID = Actor.ActorID   ")
+        sql = ("SELECT Movie.title, Actor.name,  Acts.CharacterPlayed,Actor.about, Actor.ActorID FROM Movie, Actor, Acts WHERE Movie.MovieID = Acts.MovieID AND Acts.ActorID = Actor.ActorID   ")
         mycursor.execute(sql)
         all_data = mycursor.fetchall()
         self.tableWidget2.setRowCount(len(all_data[1]))
         self.tableWidget2.setColumnCount(len(all_data[0]))
-        self.tableWidget2.setColumnWidth(0,600)
-        self.tableWidget2.setColumnWidth(1,600)
+        self.tableWidget2.setColumnWidth(0,400)
+        self.tableWidget2.setColumnWidth(1,350)
         self.tableWidget2.setColumnWidth(2,530)
-        self.tableWidget2.setColumnWidth(3,150)
+        self.tableWidget2.setColumnWidth(3,680)
+        self.tableWidget2.setColumnWidth(4,100)
 
  
-        self.tableWidget2.setHorizontalHeaderLabels(['Movie Title', "Actor's Name", 'Character Played', "Actor's ID"])
+        self.tableWidget2.setHorizontalHeaderLabels(['Movie Title', "Actor's Name", 'Character Played', 'About', "Actor's ID"])
         for row in range(1):
             for column in range(0):
                 item = QTableWidgetItem(all_data[row][column])
@@ -707,7 +708,7 @@ class Ui_MainWindow(object):
             for row in range(self.tableWidget2.rowCount()):
                 self.tableWidget2.setRowHeight(row, 100)
 
-#Function for the search field of the table students_info
+#Function for the search field of Actors
     def filter2(self, filter_text):
         for i in range(self.tableWidget2.rowCount()):
             for j in range(self.tableWidget2.columnCount()):
@@ -746,7 +747,7 @@ class Ui_MainWindow(object):
             for row in range(self.tableWidget3.rowCount()):
                 self.tableWidget3.setRowHeight(row, 100)
 
-#Function for the search field of the table students_info
+#Function for the search field of the Directors
     def filter3(self, filter_text):
         for i in range(self.tableWidget3.rowCount()):
             for j in range(self.tableWidget3.columnCount()):
@@ -781,8 +782,9 @@ class Ui_MainWindow(object):
             self.tableWidget4.insertRow(row_position)
             
             for row in range(self.tableWidget.rowCount()):
-                self.tableWidget4.setRowHeight(row, 100)
+                self.tableWidget4.setRowHeight(row, 150)
 
+#Function for the search field of the Movie's Genre
     def filter4(self, filter_text):
         for i in range(self.tableWidget4.rowCount()):
             for j in range(self.tableWidget4.columnCount()):
